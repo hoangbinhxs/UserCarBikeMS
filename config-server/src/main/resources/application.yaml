@@ -8,6 +8,6 @@ spring:
           default-label: master
           uri: https://github.com/hoangbinhxs/UserCarBikeMS
           search-paths: config-data
-  aplication:
+  application:
     name: config-server
 
