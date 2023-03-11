@@ -42,12 +42,13 @@ public class UserController {
         return ResponseEntity.ok(userNew);
     }
 
+
     @GetMapping("/cars/{userId}")
     public ResponseEntity<List<Car>> getCars(@PathVariable("userId") int id){
         Usuario user = userService.getUserById(id);
         if(user == null)
             return ResponseEntity.notFound().build();
-        List<Car> cars = userService.getCars(id);
+        List<Car> cars = userService.getCarsFeign(id);
         return ResponseEntity.ok(cars);
     }
 
@@ -58,5 +59,18 @@ public class UserController {
             return ResponseEntity.notFound().build();
         List<Bike> bikes = userService.getBike(id);
         return ResponseEntity.ok(bikes);
+    }
+
+
+    @PostMapping("/savecar/{userId}")
+    public ResponseEntity<Car>  saveCar(@PathVariable("userId") int userId, @RequestBody Car car){
+        Car carNew = userService.saveCar(userId,car);
+        return ResponseEntity.ok(car);
+    }
+
+    @PostMapping("/savebike/{userId}")
+    public ResponseEntity<Bike>  saveBike(@PathVariable("userId") int userId, @RequestBody Bike bike){
+        Bike bikeNew = userService.saveBike(userId,bike);
+        return ResponseEntity.ok(bikeNew);
     }
 }
